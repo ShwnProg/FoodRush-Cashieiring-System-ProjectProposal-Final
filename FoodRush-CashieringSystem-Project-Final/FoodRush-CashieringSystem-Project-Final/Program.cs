@@ -347,6 +347,7 @@ namespace FoodRush_CashieringSystem_Project_Final
         {
             // Display the menu header
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("\n\n");
             Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("\t\t ║                            FoodRush Menu                                   ║");
             Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
