@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -270,10 +270,6 @@ namespace FoodRush_CashieringSystem_Project_Final
 
                     // Calculate the change
                     CalculateChange(cash, grandTotal);
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("\n\n [Transaction Saved]");
-
-
                 }
                 else
                 {
@@ -322,25 +318,25 @@ namespace FoodRush_CashieringSystem_Project_Final
         public static void InitializeFoodData(string[,] order)
         {
             // Combo Meals
-            order[0, 0] = "C1"; order[0, 1] = "Classic Ham Burger + Fries                   "; order[0, 2] = "159.00";
-            order[1, 0] = "C2"; order[1, 1] = "Chicken Nuggets w/rice + Double Cheese Burger"; order[1, 2] = "199.00";
-            order[2, 0] = "C3"; order[2, 1] = "Chicken Burger + Spaghetti                   "; order[2, 2] = "179.00";
-            order[3, 0] = "C4"; order[3, 1] = "Pork Steak w/rice + Classic Ham Burger       "; order[3, 2] = "189.00";
-            order[4, 0] = "C5"; order[4, 1] = "Fish Fillet w/rice + Rice + Mango Juice      "; order[4, 2] = "169.00";
+            order[0, 0] = "C1"; order[0, 1] = "Ham Burger + Fries"; order[0, 2] = "159.00";
+            order[1, 0] = "C2"; order[1, 1] = "Nuggets + Cheese Burger"; order[1, 2] = "199.00";
+            order[2, 0] = "C3"; order[2, 1] = "Chicken Burger + Spaghetti"; order[2, 2] = "179.00";
+            order[3, 0] = "C4"; order[3, 1] = "Pork Steak + Ham Burger"; order[3, 2] = "189.00";
+            order[4, 0] = "C5"; order[4, 1] = "Fish Fillet + Mango Juice"; order[4, 2] = "169.00";
 
             // Drinks
-            order[5, 0] = "D1"; order[5, 1] = "Iced Tea                                     "; order[5, 2] = "39.00";
-            order[6, 0] = "D2"; order[6, 1] = "Lemon Juice                                  "; order[6, 2] = "49.00";
-            order[7, 0] = "D3"; order[7, 1] = "Bottled Water                                "; order[7, 2] = "29.00";
-            order[8, 0] = "D4"; order[8, 1] = "Mango Juice                                  "; order[8, 2] = "59.00";
-            order[9, 0] = "D5"; order[9, 1] = "Coffee                                       "; order[9, 2] = "45.00";
+            order[5, 0] = "D1"; order[5, 1] = "Iced Tea"; order[5, 2] = "39.00";
+            order[6, 0] = "D2"; order[6, 1] = "Lemon Juice"; order[6, 2] = "49.00";
+            order[7, 0] = "D3"; order[7, 1] = "Bottled Water"; order[7, 2] = "29.00";
+            order[8, 0] = "D4"; order[8, 1] = "Mango Juice"; order[8, 2] = "59.00";
+            order[9, 0] = "D5"; order[9, 1] = "Coffee"; order[9, 2] = "45.00";
 
             // Desserts
-            order[10, 0] = "DE1"; order[10, 1] = "Ice Cream                                    "; order[10, 2] = "59.00";
-            order[11, 0] = "DE2"; order[11, 1] = "Brownies                                     "; order[11, 2] = "69.00";
-            order[12, 0] = "DE3"; order[12, 1] = "Cheesecake                                   "; order[12, 2] = "89.00";
-            order[13, 0] = "DE4"; order[13, 1] = "Fruit Salad                                  "; order[13, 2] = "79.00";
-            order[14, 0] = "DE5"; order[14, 1] = "Leche Flan                                   "; order[14, 2] = "99.00";
+            order[10, 0] = "DE1"; order[10, 1] = "Ice Cream"; order[10, 2] = "59.00";
+            order[11, 0] = "DE2"; order[11, 1] = "Brownies"; order[11, 2] = "69.00";
+            order[12, 0] = "DE3"; order[12, 1] = "Cheesecake"; order[12, 2] = "89.00";
+            order[13, 0] = "DE4"; order[13, 1] = "Fruit Salad"; order[13, 2] = "79.00";
+            order[14, 0] = "DE5"; order[14, 1] = "Leche Flan"; order[14, 2] = "99.00";
         }
 
         // Show the menu items to the user // - Cashiering Transaction 
@@ -350,37 +346,38 @@ namespace FoodRush_CashieringSystem_Project_Final
         public static void DisplayMenu(string[,] order)
         {
             // Display the menu header
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(" ╔════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine(" ║                            FoodRush Menu                                   ║");
-            Console.WriteLine(" ╚════════════════════════════════════════════════════════════════════════════╝");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("\t\t ║                            FoodRush Menu                                   ║");
+            Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("\n   Menu Code      Meal Name                                        Price  ");
-            Console.WriteLine(" ╔════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("\n\t\t    Menu Code      Meal Name                                        Price  ");
+            Console.WriteLine("\t\t   ╔════════════════════════════════════════════════════════════════════════════╗");
 
             // Display Combo Meals
-            Console.WriteLine("\n [Combo Meals]---------------------------------------------------------\n");
+            Console.WriteLine("\n\t\t   [Combo Meals]---------------------------------------------------------\n");
             for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine("    [{0}]          {1,-30}   {2,7}", order[i, 0], order[i, 1], order[i, 2]);
+                Console.WriteLine("\t\t    [{0}]       {1,-40} {2,8}", order[i, 0], order[i, 1], order[i, 2]);
             }
 
             // Display Drinks
-            Console.WriteLine("\n [Drinks]---------------------------------------------------------------\n");
+            Console.WriteLine("\n\t\t   [Drinks]---------------------------------------------------------------\n");
             for (int i = 5; i < 10; i++)
             {
-                Console.WriteLine("    [{0}]          {1,-30}   {2,7}", order[i, 0], order[i, 1], order[i, 2]);
+                Console.WriteLine("\t\t    [{0}]       {1,-40} {2,8}", order[i, 0], order[i, 1], order[i, 2]);
             }
 
             // Display Desserts
-            Console.WriteLine("\n [Desserts]--------------------------------------------------------------\n");
+            Console.WriteLine("\n\t\t   [Desserts]--------------------------------------------------------------\n");
             for (int i = 10; i < 15; i++)
             {
-                Console.WriteLine("    [{0}]         {1,-30}   {2,7}", order[i, 0], order[i, 1], order[i, 2]);
+                Console.WriteLine("\t\t    [{0}]       {1,-40} {2,8}", order[i, 0], order[i, 1], order[i, 2]);
             }
 
-            Console.WriteLine(" ╚════════════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
         }
+
 
 
         // Get the item name using the code // - Cashiering Transaction
@@ -505,32 +502,32 @@ namespace FoodRush_CashieringSystem_Project_Final
 
         public static void DisplayOrderSummary(string[,] orders, ref int orderIndex, int orderNumber, string today, double grandTotal)
         {
-            //display order summary header
+            // Display order summary header
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                                                  ORDER SUMMARY                                                     ║");
-            Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("\t\t ║                               ORDER SUMMARRY                               ║");
+            Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("|  Item Number  |         Food Item                             |   Unit Price      |    Quantity    |   Sub Total  |");
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-
-
+            Console.WriteLine("\t\t     Order Number : {0}", orderNumber);
+            Console.WriteLine("\t\t     Date         : {0}", today);
+            Console.WriteLine("\t\t   -------------------------------------------------------------------------");
+            Console.WriteLine("\t\t     Item                         Quantity                   Price");
+            Console.WriteLine("\t\t   -------------------------------------------------------------------------");
             for (int i = 0; i < orderIndex; i++)
             {
                 if (orders[i, 3] == orderNumber.ToString())
                 {
-                    Console.WriteLine("|      {0,-8} | {1,-16} |     {2,-10}PHP |        {3,-7} |   {4,-5}PHP   |", orders[i, 5], orders[i, 6], orders[i, 7], orders[i, 8], orders[i, 9]);
+                    Console.WriteLine("\t\t     {0,-26}      {1,-19} {2,7} PHP", orders[i, 6], orders[i, 8], orders[i, 9]);
                 }
             }
-            //display order summary details
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("|Order Number : {0,93}       |", orderNumber);
-            Console.WriteLine("|Date         :    {0,93}    |", today);
-            Console.WriteLine("|Amount Due   : {0,91} PHP     |", grandTotal);
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
 
+            Console.WriteLine("\t\t   -------------------------------------------------------------------------");
+            Console.WriteLine("\t\t     Total Amount   : {0,42} PHP", grandTotal); 
+            Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("\t\t ║                   Review your order and proceed to payment.                ║");
+            Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
         }
+ 
 
         // Ask for payment and show change // - Cashiering Transaction
         //---------------------------------------------------------------------------------------------------------------//
@@ -572,6 +569,10 @@ namespace FoodRush_CashieringSystem_Project_Final
                 //  display message if no change is required
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("\n\t\t\t Exact amount received. No change required.");
+                Console.WriteLine(" ╔════════════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine(" ║                       Thank you for your payment!                          ║");
+                Console.WriteLine(" ╚════════════════════════════════════════════════════════════════════════════╝");
+            
             }
             else
             {
@@ -581,6 +582,11 @@ namespace FoodRush_CashieringSystem_Project_Final
                 Console.WriteLine(" | Total Change : {0,5} |",change);
                 Console.WriteLine(" ------------------------");
                 Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(" ╔════════════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine(" ║                        Thank you for your payment!                         ║");
+                Console.WriteLine(" ╚════════════════════════════════════════════════════════════════════════════╝");
+            
             }
             return validCash;
         }
@@ -594,7 +600,12 @@ namespace FoodRush_CashieringSystem_Project_Final
             do
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("\t\t ║                            View Customer Order                             ║");
+                Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
 
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 //validate order number
                 Console.Write("\n\t\t >>Enter order number      : ");
                 string orderNumber = Console.ReadLine();
@@ -678,7 +689,6 @@ namespace FoodRush_CashieringSystem_Project_Final
 
         //display overall order details // - View Customer Order
         //---------------------------------------------------------------------------------------------------------------//
-
         public static void DisplayOrderDetails(string[,] orders, int orderIndex, string orderNumber, string dateOrder)
         {
             //display order report header
@@ -687,11 +697,9 @@ namespace FoodRush_CashieringSystem_Project_Final
             Console.WriteLine("║                                                  ORDER DETAILS                                                     ║");
             Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
 
-            Console.ForegroundColor= ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("|               |                                               |                   |                |              |");
-            Console.WriteLine("|  Item Number  |         Food Item                             |    Unit Price     |    Quantity    |    Total     |");
-            Console.WriteLine("|               |                                               |                   |                |              |");
+            Console.WriteLine("|  Item Number    |                  Food Item                              |  Unit Price  |  Quantity  |   Total   |");
             Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
 
             for (int j = 0; j < orderIndex; j++)
@@ -699,18 +707,19 @@ namespace FoodRush_CashieringSystem_Project_Final
                 if (orders[j, 3] == orderNumber && orders[j, 4] == dateOrder)
                 {
                     //display order report details
-                    Console.WriteLine("|      {0,-8} | {1,-16} |     {2,-5}PHP      |        {3,-7} |     {4,-5}PHP |", orders[j, 5],
-                                                                                                                        orders[j, 6],
-                                                                                                                        orders[j, 7],
-                                                                                                                        orders[j, 8],
-                                                                                                                        orders[j, 9]);
+                    Console.WriteLine("|      {0,-10} | {1,-55} |   {2,6} PHP |    {3,-7} | {4,5} PHP |", orders[j, 5],
+                                                                                                            orders[j, 6],
+                                                                                                            orders[j, 7],
+                                                                                                            orders[j, 8],
+                                                                                                            orders[j, 9]);
                     Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
 
                 }
             }
 
-
         }
+   
+
         //calculate overall total// - View Customer Order
         //---------------------------------------------------------------------------------------------------------------//
 
@@ -737,8 +746,13 @@ namespace FoodRush_CashieringSystem_Project_Final
             do
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("\t\t ║                                  View Sales                                ║");
+                Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
 
                 //prompt user for date
+                Console.ForegroundColor= ConsoleColor.Yellow;
                 Console.Write("\n\t\t >>Enter date [MM/DD/YYY]: ");
                 string date = Console.ReadLine();
 
@@ -822,27 +836,27 @@ namespace FoodRush_CashieringSystem_Project_Final
             //display sales report header
             // Header with Smooth Box and Color
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                                                SALES REPORT                                           ║");
-            Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\t\t╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("\t\t║                                                SALES REPORT                                           ║");
+            Console.WriteLine("\t\t╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("|                                               |                   |                    |              |");
-            Console.WriteLine("|         Food Item                             |    Unit Price     |      Quantity      |    Total     |");
-            Console.WriteLine("|                                               |                   |                    |              |");
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("\t\t|                                               |                   |                    |              |");
+            Console.WriteLine("\t\t|         Food Item                             |    Unit Price     |      Quantity      |    Total     |");
+            Console.WriteLine("\t\t|                                               |                   |                    |              |");
+            Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
 
             for (int j = 0; j < orderIndex; j++)
             {
                 if (orders[j, 4] == dateOrder)
                 {
                     //display sales report details
-                    Console.WriteLine("| {1,-16} |     {2,-5}PHP      |        {3,-7}     |     {4,-5}PHP |", orders[j, 5],
+                    Console.WriteLine("\t\t| {1,-45} |     {2,-5}PHP      |        {3,-7}     |     {4,-5}PHP |", orders[j, 5],
                                                                                                                         orders[j, 6],
                                                                                                                         orders[j, 7],
                                                                                                                         orders[j, 8],
                                                                                                                         orders[j, 9]);
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
 
                 }
             }
