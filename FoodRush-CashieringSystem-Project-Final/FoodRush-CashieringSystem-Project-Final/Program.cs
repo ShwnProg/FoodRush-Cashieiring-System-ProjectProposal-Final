@@ -54,7 +54,7 @@ namespace FoodRush_CashieringSystem_Project_Final
                     }
                     Console.WriteLine("\n");
                     ShowMainMenu();
-                  
+
                 }
                 else
                 {
@@ -94,7 +94,7 @@ namespace FoodRush_CashieringSystem_Project_Final
                 Console.WriteLine("\t\t\t\t\t ║ 3. View Sales                 ║");
                 Console.WriteLine("\t\t\t\t\t ║ 4. EXIT                       ║");
                 Console.WriteLine("\t\t\t\t\t ╚═══════════════════════════════╝");
-                
+
                 Console.ResetColor();
                 // Prompt the user for an option
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -112,7 +112,7 @@ namespace FoodRush_CashieringSystem_Project_Final
                     //Console.ResetColor();
                 }
 
-                
+
                 switch (userOpt)
                 {
                     case "1":
@@ -216,7 +216,7 @@ namespace FoodRush_CashieringSystem_Project_Final
                         // Show total price
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("\n ----------------------------------");
-                        Console.WriteLine("\tAdded: {0} x {1} - PHP {2}",quantity,itemNumber,total);
+                        Console.WriteLine("\tAdded: {0} x {1} - PHP {2}", quantity, itemNumber, total);
                         Console.WriteLine(" ----------------------------------");
                         Console.ResetColor();
 
@@ -523,12 +523,12 @@ namespace FoodRush_CashieringSystem_Project_Final
             }
 
             Console.WriteLine("\t\t   -------------------------------------------------------------------------");
-            Console.WriteLine("\t\t     Total Amount   : {0,42} PHP", grandTotal); 
+            Console.WriteLine("\t\t     Total Amount   : {0,42} PHP", grandTotal);
             Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("\t\t ║                   Review your order and proceed to payment.                ║");
             Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
         }
- 
+
 
         // Ask for payment and show change // - Cashiering Transaction
         //---------------------------------------------------------------------------------------------------------------//
@@ -573,21 +573,21 @@ namespace FoodRush_CashieringSystem_Project_Final
                 Console.WriteLine(" ╔════════════════════════════════════════════════════════════════════════════╗");
                 Console.WriteLine(" ║                       Thank you for your payment!                          ║");
                 Console.WriteLine(" ╚════════════════════════════════════════════════════════════════════════════╝");
-            
+
             }
             else
             {
                 // display change
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\n ------------------------");
-                Console.WriteLine(" | Total Change : {0,5} |",change);
+                Console.WriteLine(" | Total Change : {0,5} |", change);
                 Console.WriteLine(" ------------------------");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine(" ╔════════════════════════════════════════════════════════════════════════════╗");
                 Console.WriteLine(" ║                        Thank you for your payment!                         ║");
                 Console.WriteLine(" ╚════════════════════════════════════════════════════════════════════════════╝");
-            
+
             }
             return validCash;
         }
@@ -719,7 +719,7 @@ namespace FoodRush_CashieringSystem_Project_Final
             }
 
         }
-   
+
 
         //calculate overall total// - View Customer Order
         //---------------------------------------------------------------------------------------------------------------//
@@ -753,7 +753,7 @@ namespace FoodRush_CashieringSystem_Project_Final
                 Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
 
                 //prompt user for date
-                Console.ForegroundColor= ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("\n\t\t >>Enter date [MM/DD/YYY]: ");
                 string date = Console.ReadLine();
 
@@ -767,8 +767,8 @@ namespace FoodRush_CashieringSystem_Project_Final
                     //display order report details
                     double totalAmount = CalculateOverAllSales(orders, orderIndex, date);
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("| Total Sales   :      {0,75}  PHP |", totalAmount);
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("/t/t| Total Sales   :      {0,75}  PHP |", totalAmount);
+                    Console.WriteLine("/t/t---------------------------------------------------------------------------------------------------------");
 
                 }
                 else
@@ -847,20 +847,59 @@ namespace FoodRush_CashieringSystem_Project_Final
             Console.WriteLine("\t\t|                                               |                   |                    |              |");
             Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
 
+            //for (int j = 0; j < orderIndex; j++)
+            //{
+            //    if (orders[j, 4] == dateOrder)
+            //    {
+            //        //display sales report details
+            //        Console.WriteLine("\t\t| {1,-45} |     {2,-5}PHP      |        {3,-7}     |     {4,-5}PHP |", orders[j, 5],
+            //                                                                                                            orders[j, 6],
+            //                                                                                                            orders[j, 7],
+            //                                                                                                            orders[j, 8],
+            //                                                                                                            orders[j, 9]);
+            //        Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
+
+            //    }
+            //}
+
+            int q1 = 0;
+            double t1 = 0;
             for (int j = 0; j < orderIndex; j++)
             {
-                if (orders[j, 4] == dateOrder)
+                if (orders[j, 4] == dateOrder && orders[j,5] == "C1")
                 {
-                    //display sales report details
-                    Console.WriteLine("\t\t| {1,-45} |     {2,-5}PHP      |        {3,-7}     |     {4,-5}PHP |", orders[j, 5],
-                                                                                                                        orders[j, 6],
-                                                                                                                        orders[j, 7],
-                                                                                                                        orders[j, 8],
-                                                                                                                        orders[j, 9]);
-                    Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
-
+                    q1 += int.Parse(orders[j, 8]);
+                    t1 += double.Parse(orders[j, 9]);
                 }
+
             }
+
+            if (q1 > 0)
+            {
+                Console.WriteLine("\t\t| Ham Burger + Fries |     PHP 159.00      |        {0,-7}     |     {1,-5}PHP |", q1, t1);
+                Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
+
+            }
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "C2")
+                {
+                    q1 += int.Parse(orders[j, 8]);
+                    t1 += double.Parse(orders[j, 9]);
+                }
+
+            }
+
+            if (q1 > 0)
+            {
+                Console.WriteLine("\t\t| Ham Burger + Fries |     PHP 159.00      |        {0,-7}     |     {1,-5}PHP |", q1, t1);
+                Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
+
+            }
+
+
+
+
 
 
         }
