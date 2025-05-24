@@ -71,7 +71,7 @@ namespace FoodRush_CashieringSystem_Project_Final
 
         public static void ShowMainMenu()
         {
-            string[,] orders = new string[1000, 13];
+            string[,] orders = new string[1000, 10];
 
             int orderIndex = 0;
             int orderNumber = 1;
@@ -508,22 +508,26 @@ namespace FoodRush_CashieringSystem_Project_Final
             Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("\t\t ║                               ORDER SUMMARRY                               ║");
             Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\t\t     Order Number : {0}", orderNumber);
             Console.WriteLine("\t\t     Date         : {0}", today);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\t\t   -------------------------------------------------------------------------");
-            Console.WriteLine("\t\t     Item                         Quantity                   Price");
+            Console.WriteLine("\t\t             Item                    Unit Price       Quantity      Price");
             Console.WriteLine("\t\t   -------------------------------------------------------------------------");
             for (int i = 0; i < orderIndex; i++)
             {
                 if (orders[i, 3] == orderNumber.ToString())
                 {
-                    Console.WriteLine("\t\t     {0,-26}      {1,-19} {2,7} PHP", orders[i, 6], orders[i, 8], orders[i, 9]);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("\t\t     {0,-26}         {1,-5}             {2,-5} {3,6} PHP", orders[i, 6],orders[i,7], orders[i, 8], orders[i, 9]);
                 }
             }
+            Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine("\t\t   -------------------------------------------------------------------------");
-            Console.WriteLine("\t\t     Total Amount   : {0,42} PHP", grandTotal);
+            Console.WriteLine("\t\t     Total Amount   : {0,48} PHP", grandTotal);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
             Console.WriteLine("\t\t ║                   Review your order and proceed to payment.                ║");
             Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
@@ -538,7 +542,7 @@ namespace FoodRush_CashieringSystem_Project_Final
             bool validCash = true;
             double change;
 
-            while (validCash)
+            do
             {
                 try
                 {
@@ -563,7 +567,8 @@ namespace FoodRush_CashieringSystem_Project_Final
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\n\t\t\t Invalid input. Please enter a valid amount: ");
                 }
-            }
+
+            } while (validCash);
             change = cash - grandTotal; //compute change
             if (cash == grandTotal)
             {
@@ -602,9 +607,10 @@ namespace FoodRush_CashieringSystem_Project_Final
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
-                Console.WriteLine("\t\t ║                            View Customer Order                             ║");
-                Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
+                Console.WriteLine("\t\t ╔══════════════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("\t\t ║                              View Customer Order                             ║");
+                Console.WriteLine("\t\t ╚══════════════════════════════════════════════════════════════════════════════╝");
+            
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 //validate order number
@@ -614,6 +620,7 @@ namespace FoodRush_CashieringSystem_Project_Final
                 //validate date format
                 Console.Write("\n\t\t >>Enter date [MM/DD/YYYY] : ");
                 string dateOrder = Console.ReadLine();
+
                 Console.ResetColor();
                 //check if order number and date exist
                 if (IsValidOrder(orderNumber, dateOrder, orders, orderIndex))
@@ -626,8 +633,10 @@ namespace FoodRush_CashieringSystem_Project_Final
                     //display order report details
                     double totalAmount = CalculateTotalAmount(orders, orderIndex, orderNumber, dateOrder);
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("| Grand Total  :      {0,88}  PHP |", totalAmount);
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("\t\t | Grand Total  :      {0,63}  PHP |", totalAmount);
+                    Console.WriteLine("\t\t --------------------------------------------------------------------------------------------");
+
+
 
                 }
                 else
@@ -694,26 +703,28 @@ namespace FoodRush_CashieringSystem_Project_Final
         {
             //display order report header
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                                                  ORDER DETAILS                                                     ║");
-            Console.WriteLine("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\t\t ╔═══════════════════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("\t\t ║                                        ORDER DETAILS                                      ║");
+            Console.WriteLine("\t\t ╚═══════════════════════════════════════════════════════════════════════════════════════════╝");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("|  Item Number    |                  Food Item                              |  Unit Price  |  Quantity  |   Total   |");
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("\t\t --------------------------------------------------------------------------------------------");
+            Console.WriteLine("\t\t |  Item Number    |            Food Item           |  Unit Price  |  Quantity  |   Total   |");
+            Console.WriteLine("\t\t --------------------------------------------------------------------------------------------");
 
             for (int j = 0; j < orderIndex; j++)
             {
                 if (orders[j, 3] == orderNumber && orders[j, 4] == dateOrder)
                 {
                     //display order report details
-                    Console.WriteLine("|      {0,-10} | {1,-55} |   {2,6} PHP |    {3,-7} | {4,5} PHP |", orders[j, 5],
+                    Console.WriteLine("\t\t |      {0,-10} | {1,-30} | {2,6} PHP   |    {3,-7} | {4,5} PHP |",   orders[j, 5],
                                                                                                             orders[j, 6],
                                                                                                             orders[j, 7],
                                                                                                             orders[j, 8],
                                                                                                             orders[j, 9]);
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("\t\t --------------------------------------------------------------------------------------------");
+
+
 
                 }
             }
@@ -748,9 +759,12 @@ namespace FoodRush_CashieringSystem_Project_Final
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("\t\t ╔════════════════════════════════════════════════════════════════════════════╗");
-                Console.WriteLine("\t\t ║                                  View Sales                                ║");
-                Console.WriteLine("\t\t ╚════════════════════════════════════════════════════════════════════════════╝");
+                Console.WriteLine("\t\t ╔══════════════════════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("\t\t ║                                    View Sales                                ║");
+                Console.WriteLine("\t\t ╚══════════════════════════════════════════════════════════════════════════════╝");
+
+
+
 
                 //prompt user for date
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -766,9 +780,10 @@ namespace FoodRush_CashieringSystem_Project_Final
 
                     //display order report details
                     double totalAmount = CalculateOverAllSales(orders, orderIndex, date);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("/t/t| Total Sales   :      {0,75}  PHP |", totalAmount);
-                    Console.WriteLine("/t/t---------------------------------------------------------------------------------------------------------");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("\t\t | Total Sales   :      {0,50} PHP  |", totalAmount);
+                    Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
 
                 }
                 else
@@ -813,7 +828,7 @@ namespace FoodRush_CashieringSystem_Project_Final
 
         }
 
-        //validate order// - View Sales
+         //validate order// - View Sales
         //---------------------------------------------------------------------------------------------------------------//
 
         public static bool IsTransactionFound(string dateOrder, string[,] orders, int orderIndex)
@@ -829,7 +844,7 @@ namespace FoodRush_CashieringSystem_Project_Final
             return false;
         }
 
-        //display overall total sales// - View Sales
+         //display overall total sales// - View Sales
         //---------------------------------------------------------------------------------------------------------------//
 
         public static void DisplayOverallTotalSales(string[,] orders, int orderIndex, string dateOrder)
@@ -837,15 +852,14 @@ namespace FoodRush_CashieringSystem_Project_Final
             //display sales report header
             // Header with Smooth Box and Color
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\t\t╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("\t\t║                                                SALES REPORT                                           ║");
-            Console.WriteLine("\t\t╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\t\t ╔══════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("\t\t ║                                    SALES REPORT                              ║");
+            Console.WriteLine("\t\t ╚══════════════════════════════════════════════════════════════════════════════╝");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("\t\t|                                               |                   |                    |              |");
-            Console.WriteLine("\t\t|         Food Item                             |    Unit Price     |      Quantity      |    Total     |");
-            Console.WriteLine("\t\t|                                               |                   |                    |              |");
-            Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+            Console.WriteLine("\t\t |         Food Item          |    Unit Price     |   Quantity   |     Total    |");
+            Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
 
             //for (int j = 0; j < orderIndex; j++)
             //{
@@ -862,46 +876,289 @@ namespace FoodRush_CashieringSystem_Project_Final
             //    }
             //}
 
-            int q1 = 0;
-            double t1 = 0;
+            int c1 = 0;
+            double cT1 = 0;
             for (int j = 0; j < orderIndex; j++)
             {
-                if (orders[j, 4] == dateOrder && orders[j,5] == "C1")
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "C1")
                 {
-                    q1 += int.Parse(orders[j, 8]);
-                    t1 += double.Parse(orders[j, 9]);
+                    c1 += Convert.ToInt32(orders[j, 8]);
+                    cT1 += Convert.ToDouble(orders[j, 9]);
                 }
 
             }
 
-            if (q1 > 0)
+            if (c1 > 0)
             {
-                Console.WriteLine("\t\t| Ham Burger + Fries |     PHP 159.00      |        {0,-7}     |     {1,-5}PHP |", q1, t1);
-                Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |",orders[0,1],orders[0,2], c1, cT1);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
 
             }
+            int c2 = 0;
+            double cT2 = 0;
             for (int j = 0; j < orderIndex; j++)
             {
                 if (orders[j, 4] == dateOrder && orders[j, 5] == "C2")
                 {
-                    q1 += int.Parse(orders[j, 8]);
-                    t1 += double.Parse(orders[j, 9]);
+                    c2 += Convert.ToInt32(orders[j, 8]);
+                    cT2 += Convert.ToDouble(orders[j, 9]);
                 }
 
             }
 
-            if (q1 > 0)
+            if (c2 > 0)
             {
-                Console.WriteLine("\t\t| Ham Burger + Fries |     PHP 159.00      |        {0,-7}     |     {1,-5}PHP |", q1, t1);
-                Console.WriteLine("\t\t---------------------------------------------------------------------------------------------------------");
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |",orders[1,1], orders[1, 2], c2, cT2);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+            int c3 = 0;
+            double cT3 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "C3")
+                {
+                    c3 += Convert.ToInt32(orders[j, 8]);
+                    cT3 += Convert.ToDouble(orders[j, 9]);
+                }
 
             }
 
+            if (c3 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[2, 1], orders[2, 2], c3, cT3);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
 
+            }
 
+            int c4 = 0;
+            double cT4 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "C4")
+                {
+                    c4 += Convert.ToInt32(orders[j, 8]);
+                    cT4 += Convert.ToDouble(orders[j, 9]);
+                }
 
+            }
 
+            if (c4 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[3, 1], orders[3, 2], c4, cT4);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
 
+            }
+
+            int c5 = 0;
+            double cT5 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "C5")
+                {
+                    c5 += Convert.ToInt32(orders[j, 8]);
+                    cT5 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (c5 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[4, 1], orders[4, 2], c5, cT5);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int d1 = 0;
+            double dT1 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "D1")
+                {
+                    d1 += Convert.ToInt32(orders[j, 8]);
+                    dT1 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (d1 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[5, 1], orders[5, 2], d1, dT1);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int d2 = 0;
+            double dT2 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "D2")
+                {
+                    d2 += Convert.ToInt32(orders[j, 8]);
+                    dT2 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (d2 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[6, 1], orders[6, 2], d2, dT2);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int d3 = 0;
+            double dT3 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "D3")
+                {
+                    d3 += Convert.ToInt32(orders[j, 8]);
+                    dT3 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (d3 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[7, 1], orders[7, 2], d3, dT3);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int d4 = 0;
+            double dT4 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "D4")
+                {
+                    d4 += Convert.ToInt32(orders[j, 8]);
+                    dT4 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (d4 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[8, 1], orders[8, 2], d4, dT4);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int d5 = 0;
+            double dT5 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "D5")
+                {
+                    d5 += Convert.ToInt32(orders[j, 8]);
+                    dT5 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (d5 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[9, 1], orders[9, 2], d5, dT5);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int  dE1 = 0;
+            double dET1 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "DE1")
+                {
+                    dE1 += Convert.ToInt32(orders[j, 8]);
+                    dET1 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (dE1 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[10, 1], orders[10, 2], dE1, dET1);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int dE2 = 0;
+            double dET2 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "DE2")
+                {
+                    dE2 += Convert.ToInt32(orders[j, 8]);
+                    dET2 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (dE2 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[11, 1], orders[11, 2], dE2, dET2);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int dE3 = 0;
+            double dET3 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "DE3")
+                {
+                    dE3 += Convert.ToInt32(orders[j, 8]);
+                    dET3 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (dE3 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[12, 1], orders[12, 2], dE2, dET2);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int dE4 = 0;
+            double dET4 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "DE4")
+                {
+                    dE4 += Convert.ToInt32(orders[j, 8]);
+                    dET4 += Convert.ToDouble(orders[j, 9]);
+                }
+
+            }
+
+            if (dE4 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[13, 1], orders[13, 2], dE4, dET4);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
+
+            int dE5 = 0;
+            double dET5 = 0;
+            for (int j = 0; j < orderIndex; j++)
+            {
+                if (orders[j, 4] == dateOrder && orders[j, 5] == "DE5")
+                {
+                    dE5 += Convert.ToInt32(orders[j, 8]);
+                    dET5 += Convert.ToDouble(orders[j, 9]);
+                }               
+
+            }
+
+            if (dE5 > 0)
+            {
+                Console.WriteLine("\t\t | {0,-26} |    PHP {1,-6}     |      {2,-5}   |    PHP {3,-5} |", orders[14, 1], orders[14, 2], dE5, dET5);
+                Console.WriteLine("\t\t --------------------------------------------------------------------------------");
+
+            }
         }
 
         //calculate overall total sales// - View Sales
@@ -921,13 +1178,7 @@ namespace FoodRush_CashieringSystem_Project_Final
             return totalAmount;
         }
 
-
-
-
-
-
     }
-
 
 }
 
